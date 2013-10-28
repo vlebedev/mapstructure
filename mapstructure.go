@@ -95,11 +95,9 @@ func DecodeIntoValue(m interface{}, val reflect.Value) error {
                 Metadata: nil,
                 Result:   val,
         }
-        fmt.Println("decoding...")
 
         decoder, err := NewValueDecoder(config)
         if err != nil {
-                fmt.Println(err)
                 return err
         }
         return decoder.decode("", m, val.Elem())
@@ -185,7 +183,6 @@ func (d *Decoder) Decode(raw interface{}) error {
 func (d *Decoder) decode(name string, data interface{}, val reflect.Value) error {
         if data == nil {
                 // If the data is nil, then we don't set anything.
-                fmt.Println("data is nil")
                 return nil
         }
 
@@ -197,10 +194,8 @@ func (d *Decoder) decode(name string, data interface{}, val reflect.Value) error
                 fmt.Println("data is invalid")
                 return nil
         }
-        fmt.Println("hey im here")
         var err error
         dataKind := d.getKind(val)
-        fmt.Println(dataKind)
 
         switch dataKind {
         case reflect.Bool:
